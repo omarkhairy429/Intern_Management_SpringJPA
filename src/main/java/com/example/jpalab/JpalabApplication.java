@@ -18,19 +18,26 @@ public class JpalabApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpalabApplication.class, args);
-
-		System.out.println();
 	}
 
 	@Bean
 	public CommandLineRunner testingOurRepos(InternRepository internRepository,
 											 ProjectRepository projectRepository) {
 		return args -> {
-			List<Intern> interns = internRepository.findByInternBirthDateBefore(LocalDate.of(2003, 01, 01));
-			for (Intern intern: interns) {
+			List<Intern> interns1 = internRepository.findByInternBirthDateBefore(LocalDate.of(2003, 01, 01));
+			for (Intern intern: interns1) {
 				System.out.println(intern.getInternEmail());
 				System.out.println(intern.getInternBirthDate());
 			}
+
+			List<Intern> interns2 = internRepository.findByTrackOrderByName("Backend");
+			for (Intern intern: interns2) {
+				System.out.println(intern.getInternEmail());
+				System.out.println(intern.getInternBirthDate());
+			}
+
+
+
 			Intern intern1 = internRepository.findByInternEmail("omar@example.com");
 			System.out.println(intern1.getInternName());
 
