@@ -1,7 +1,10 @@
 package com.example.jpalab;
 
 import com.example.jpalab.entity.Intern;
+import com.example.jpalab.entity.Project;
+import com.example.jpalab.enums.ProjectStatus;
 import com.example.jpalab.repository.InternRepository;
+import com.example.jpalab.repository.ProjectRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +23,8 @@ public class JpalabApplication {
 	}
 
 	@Bean
-	public CommandLineRunner testingOurRepos(InternRepository internRepository) {
+	public CommandLineRunner testingOurRepos(InternRepository internRepository,
+											 ProjectRepository projectRepository) {
 		return args -> {
 			List<Intern> interns = internRepository.findByInternBirthDateBefore(LocalDate.of(2003, 01, 01));
 			for (Intern intern: interns) {
@@ -29,6 +33,15 @@ public class JpalabApplication {
 			}
 			Intern intern1 = internRepository.findByInternEmail("omar@example.com");
 			System.out.println(intern1.getInternName());
+
+			List<Project> projects = projectRepository.findByProjectName("Task Tracker API");
+			for (Project project: projects) {
+				System.out.println(project.getProjectName());
+				System.out.println(project.getProjectId());
+			}
+			int numberOfPlannedProjects = projectRepository.countByProjectStatus(ProjectStatus.planned);
+			System.out.println("Number of planned projects: "+ numberOfPlannedProjects);
+
 		};
 	}
 
