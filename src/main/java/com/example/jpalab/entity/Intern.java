@@ -30,5 +30,13 @@ public class Intern {
     @Column(name = "birth_date", nullable = false)
     private LocalDate internBirthDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id")
+    private Mentor mentor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "track_id", nullable = false)
+    private Track track;
+
 
 }
