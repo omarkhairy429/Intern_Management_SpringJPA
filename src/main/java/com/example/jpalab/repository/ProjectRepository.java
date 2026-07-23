@@ -12,4 +12,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     public List<Project> findByProjectStatus(ProjectStatus projectStatus);
     public List<Project> findByProjectName(String projectName);
     public Integer countByProjectStatus(ProjectStatus projectStatus);
+    public List<Project> findByInternProjects_Intern_InternName(String internName);
 }

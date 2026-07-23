@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "intern")
@@ -37,6 +39,9 @@ public class Intern {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "track_id", nullable = false)
     private Track track;
+
+    @OneToMany(mappedBy = "intern", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InternProjects> internProjects = new ArrayList<>();
 
 
 }

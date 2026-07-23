@@ -16,6 +16,7 @@ public interface InternRepository extends JpaRepository<Intern, Integer> {
     public List<Intern> findByMentorMentorName(String mentorName);
     public List<Intern> findByInternBirthDateAfter(LocalDate date);
     public List<Intern> findByInternBirthDateBefore(LocalDate date);
+    public List<Intern> findByInternProjects_Project_ProjectName(String projectName);
 
     @Query("SELECT i FROM Intern i JOIN i.track t WHERE t.trackName = ?1 ORDER BY i.internName ASC")
     List<Intern> findByTrackOrderByName(String trackName);

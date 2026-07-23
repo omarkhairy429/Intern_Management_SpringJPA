@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -26,4 +28,7 @@ public class Project {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private ProjectStatus projectStatus;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InternProjects> internProjects = new ArrayList<>();
 }
