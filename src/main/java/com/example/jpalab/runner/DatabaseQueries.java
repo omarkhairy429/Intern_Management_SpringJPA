@@ -22,30 +22,19 @@ public class DatabaseQueries implements CommandLineRunner {
     private MentorRepository mentorRepository;
     private InternProjectsRepository internProjectsRepository;
 
-    @Autowired
-    public void setInternRepository(InternRepository internRepository) {
+
+    public DatabaseQueries(InternRepository internRepository,
+                           ProjectRepository projectRepository,
+                           TrackRepository trackRepository,
+                           MentorRepository mentorRepository,
+                           InternProjectsRepository internProjectsRepository) {
         this.internRepository = internRepository;
-    }
-
-    @Autowired
-    public void setProjectRepository(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
-    }
-
-    @Autowired
-    public void setTrackRepository(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
-    }
-
-    @Autowired
-    public void setMentorRepository(MentorRepository mentorRepository) {
         this.mentorRepository = mentorRepository;
-    }
-
-    @Autowired
-    public void setInternProjectsRepository(InternProjectsRepository internProjectsRepository) {
         this.internProjectsRepository = internProjectsRepository;
     }
+
 
     @Override
     public void run (String... args) throws Exception {
