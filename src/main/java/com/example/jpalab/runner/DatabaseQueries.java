@@ -3,6 +3,7 @@ package com.example.jpalab.runner;
 import com.example.jpalab.entity.*;
 import com.example.jpalab.enums.ProjectStatus;
 import com.example.jpalab.repository.*;
+import com.example.jpalab.service.InternService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,6 +23,7 @@ public class DatabaseQueries implements CommandLineRunner {
     private MentorRepository mentorRepository;
     private InternProjectsRepository internProjectsRepository;
     private SubmissionRepository submissionRepository;
+    private InternService internService;
 
 
     public DatabaseQueries(InternRepository internRepository,
@@ -29,13 +31,15 @@ public class DatabaseQueries implements CommandLineRunner {
                            TrackRepository trackRepository,
                            MentorRepository mentorRepository,
                            InternProjectsRepository internProjectsRepository,
-                           SubmissionRepository submissionRepository) {
+                           SubmissionRepository submissionRepository,
+                           InternService internService) {
         this.internRepository = internRepository;
         this.projectRepository = projectRepository;
         this.trackRepository = trackRepository;
         this.mentorRepository = mentorRepository;
         this.internProjectsRepository = internProjectsRepository;
         this.submissionRepository = submissionRepository;
+        this.internService = internService;
     }
 
 
@@ -50,6 +54,8 @@ public class DatabaseQueries implements CommandLineRunner {
         Task14SqlReportingQueries();
         System.out.println("################");
         Task15Projection();
+        System.out.println("################");
+        changingMentor();
     }
 
     private void Task10QueryAssignmentTable() {
@@ -149,6 +155,11 @@ public class DatabaseQueries implements CommandLineRunner {
             System.out.println(internProjection.getInternName());
             System.out.println(internProjection.getMentorMentorName());
         });
+   }
+
+   private void changingMentor() {
+        System.out.println("Changing Mentor");
+        internService.changingInternMentor("omar.mo.5832@gmail.com", 1);
    }
 
 }
