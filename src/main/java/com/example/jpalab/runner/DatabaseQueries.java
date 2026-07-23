@@ -48,6 +48,8 @@ public class DatabaseQueries implements CommandLineRunner {
         Task13ValidateSampleData();
         System.out.println("################");
         Task14SqlReportingQueries();
+        System.out.println("################");
+        Task15Projection();
     }
 
     private void Task10QueryAssignmentTable() {
@@ -140,29 +142,13 @@ public class DatabaseQueries implements CommandLineRunner {
 
     }
 
-    private void FindByBirthDateBeforeQueries() {
-        internRepository.findByInternBirthDateBefore(LocalDate.of(2003, 01, 01))
-                .forEach(intern -> {
-                    System.out.println(intern.getInternEmail());
-                    System.out.println(intern.getInternBirthDate());
-                });
-    }
-
-    private void FindByTrackOrderByNameQueries() {
-        internRepository.findByTrackOrderByName("Backend").forEach(intern -> {
-            System.out.println(intern.getInternEmail());
-            System.out.println(intern.getInternBirthDate());
+   private void Task15Projection() {
+        System.out.println("Finding selected fields from interns (projection)");
+        internRepository.findAllProjectedBy().forEach(internProjection -> {
+            System.out.println(internProjection.getInternEmail());
+            System.out.println(internProjection.getInternName());
+            System.out.println(internProjection.getMentorMentorName());
         });
-    }
-
-    private void ProjectsQueries() {
-        projectRepository.findByProjectName("Task Tracker API").forEach(project -> {
-            System.out.println(project.getProjectName());
-            System.out.println(project.getProjectId());
-        });
-
-        int numberOfPlannedProjects = projectRepository.countByProjectStatus(ProjectStatus.planned);
-        System.out.println("Number of planned projects: "+ numberOfPlannedProjects);
-    }
+   }
 
 }
