@@ -1,4 +1,4 @@
-package DTO;
+package com.example.jpalab.DTO;
 
 public interface InternProjection {
     public String getInternName();
